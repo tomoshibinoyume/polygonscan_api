@@ -21,7 +21,27 @@ export class ResponsePage implements OnInit {
   ) {
   }
 
+  actionName: string;
+  showBalance: boolean = false;
+  showBlancemulti: boolean = false;
+  showTxlist: boolean = false;
+
   ngOnInit() {
+    this.getName.getOptionName()
+    .subscribe(res =>{
+      this.actionName = res;
+      console.log(this.actionName);
+      if(this.actionName == 'balance'){
+        this.showBalance = true;
+      } else if(this.actionName == 'balancemulti'){
+        this.showBlancemulti = true;
+      } else if(this.actionName == 'txlist'){
+        this.showTxlist = true;
+      } else {
+        console.log('else');
+      }
+    })
+    //
     this.api.getResponse()
     .then(res =>{
       console.log(res);

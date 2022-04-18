@@ -302,6 +302,10 @@ export class HomePage implements OnInit {
 
   submit(){
     console.log('submit =>', this.actName);
+    this.getName.funcObservable(this.actName, this.optName)
+    .subscribe(res =>{
+      console.log(res);
+    })
     this.api.submitParam(
       this.actName, this.address,
       this.addressMulti, this.tagName,

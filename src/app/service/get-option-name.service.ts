@@ -18,6 +18,7 @@ export class GetOptionNameService {
         res.next(this.optionName);
       } else {
         this.actionName = act;
+        console.log(this.actionName);
         res.next(this.actionName);
       }
     })
@@ -28,6 +29,7 @@ export class GetOptionNameService {
       if(this.optionName == 'txAddress' || this.optionName == 'txhash' || this.optionName == 'blockRange'){
         res.next(this.optionName);
       } else {
+        console.log(this.actionName);
         res.next(this.actionName);
       }
     })

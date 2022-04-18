@@ -34,6 +34,7 @@ export class ApiProviderService implements OnInit{
   apiUrl: string = 'https://api.polygonscan.com/api';
   key: string = 'EDZ7YT7WJGEVFJ8EHBY4E8BSFRUXWJKXD9';
   resArray: any;
+  address?: string;
 
   submitParam(
     act, adres?,
@@ -43,6 +44,7 @@ export class ApiProviderService implements OnInit{
     blktype?
   ): Promise<any>{
     return new Promise((resolve, reject) =>{
+      this.address = adres;
       let url = this.apiUrl + '?module=account' + '&apikey=' + this.key;
       if(act == "balance"){
         console.log('submitParam balance');

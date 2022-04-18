@@ -6,7 +6,12 @@
 
 <ion-content>
 
-  <app-balance></app-balance>
+  <div *ngIf="this.showBalance">
+    <app-balance></app-balance>
+  </div>
+  <div *ngIf="this.showBlancemulti">
+    test
+  </div>
 
   <ion-button color="primary" expand="full" (click)="pageBack()">page back</ion-button>
 
