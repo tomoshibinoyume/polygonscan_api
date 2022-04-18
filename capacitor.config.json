@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "polygon-scan",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

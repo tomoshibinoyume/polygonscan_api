@@ -1,0 +1,241 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      PolygonScan API
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <p>
+      {{this.userAgent}}{{this.browserName}}
+    </p>
+  </ion-item>
+
+    <ion-list>
+      <ion-radio-group value="action" (ionChange)="getModule($event)">
+        <ion-list-header>
+          <ion-label>select module</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>account</ion-label>
+          <ion-radio slot="start" value="action"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+    <ion-list *ngIf="this.ShowBlance">
+      <ion-item>
+        <ion-label position="floating">Insert your Address</ion-label>
+        <ion-input type="text" [(ngModel)]="this.address" name="address" id="addressBox"></ion-input>
+      </ion-item>
+      <div *ngIf="!this.browserName">
+        <ion-button color="primary" expand="full" (click)="funcAdresPaste()" *ngIf="this.pastAdresBtn">ペースト</ion-button>
+        <ion-button color="secondary" expand="full" (click)="funcAdresDelete()" *ngIf="this.deleteAdresBtn">削除</ion-button>
+      </div>
+    </ion-list>
+
+    <ion-list *ngIf="this.ShowBlancemulti">
+      <ion-item>
+        <ion-label position="floating">Insert your Address</ion-label>
+        <ion-textarea type="text" [(ngModel)]="this.addressMulti" name="addressMulti" rows="10"></ion-textarea>
+      </ion-item>
+      <div *ngIf="!this.browserName">
+        <ion-button color="primary" expand="full" (click)="funcAdresMultiPaste()" *ngIf="this.pastAdresMultiBtn">ペースト</ion-button>
+        <ion-button color="secondary" expand="full" (click)="funcAdresMultiDelete()" *ngIf="this.deleteAdresMultiBtn">削除</ion-button>
+      </div>
+      <ion-radio-group value="earliest" (ionChange)="getTag($event)">
+        <ion-list-header>
+          <ion-label>select tag in balancemulti</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>earliest</ion-label>
+          <ion-radio slot="start" value="earliest"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>pending</ion-label>
+          <ion-radio slot="start" value="pending"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>latest</ion-label>
+          <ion-radio slot="start" value="latest"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-list *ngIf="this.ShowTxlist">
+      <ion-item>
+        <ion-label position="floating">Insert startBlock #</ion-label>
+        <ion-input type="number" [(ngModel)]="this.startblk" name="startblk"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Insert endBlock #</ion-label>
+        <ion-input type="number" [(ngModel)]="this.endblk" name="endblk"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Insert page #</ion-label>
+        <ion-input type="number" [(ngModel)]="this.pageNum" name="pageNum"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Insert page #</ion-label>
+        <ion-input type="number" [(ngModel)]="this.offsetNum" name="offsetNum"></ion-input>
+      </ion-item>
+      <ion-radio-group value="asc" (ionChange)="getSort($event)">
+        <ion-list-header>
+          <ion-label>select sort in txlist</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>asc</ion-label>
+          <ion-radio slot="start" value="asc"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>desc</ion-label>
+          <ion-radio slot="start" value="desc"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-list>
+      <ion-radio-group value="balance" (ionChange)="getAction($event)">
+        <ion-list-header>
+          <ion-label>select action</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>balance</ion-label>
+          <ion-radio slot="start" value="balance"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>balancemulti</ion-label>
+          <ion-radio slot="start" value="balancemulti"></ion-radio>
+        </ion-item>
+        <!-- <ion-item>
+          <ion-label>balancehistory</ion-label>
+          <ion-radio slot="start" value="balancehistory"></ion-radio>
+        </ion-item> -->
+        <ion-item>
+          <ion-label>txlist</ion-label>
+          <ion-radio slot="start" value="txlist"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>txlistinternal</ion-label>
+          <ion-radio slot="start" value="txlistinternal"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>tokentx</ion-label>
+          <ion-radio slot="start" value="tokentx"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>tokennfttx</ion-label>
+          <ion-radio slot="start" value="tokennfttx"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>getminedblocks</ion-label>
+          <ion-radio slot="start" value="getminedblocks"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      </ion-list>
+
+      <ion-list *ngIf="this.ShowContract">
+        <ion-item>
+          <ion-label position="floating">insert contract address</ion-label>
+          <ion-input type="string" [(ngModel)]="this.contractAdres" name="contractAdres"></ion-input>
+        </ion-item>
+        <div *ngIf="!this.browserName">
+          <ion-button color="primary" expand="full" (click)="funcContractPaste()" *ngIf="this.pastContractBtn">ペースト</ion-button>
+          <ion-button color="secondary" expand="full" (click)="funcContractDelete()" *ngIf="this.deleteContractBtn">削除</ion-button>
+        </div>
+      </ion-list>
+
+      <ion-list *ngIf="this.ShowTxAddress">
+        <ion-list-header>
+          <ion-label>insert numbers</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label position="floating">Insert startBlock #</ion-label>
+          <ion-input type="number" [(ngModel)]="this.startblk" name="startblk"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Insert endBlock #</ion-label>
+          <ion-input type="number" [(ngModel)]="this.endblk" name="endblk"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Insert page #</ion-label>
+          <ion-input type="number" [(ngModel)]="this.pageNum" name="pageNum"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Insert page #</ion-label>
+          <ion-input type="number" [(ngModel)]="this.offsetNum" name="offsetNum"></ion-input>
+        </ion-item>
+        <ion-radio-group value="asc" (ionChange)="getSort($event)">
+          <ion-list-header>
+            <ion-label>select sort in txlist</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>asc</ion-label>
+            <ion-radio slot="start" value="asc"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>desc</ion-label>
+            <ion-radio slot="start" value="desc"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list *ngIf="this.ShowTxhash">
+        <ion-item>
+          <ion-label position="floating">insert txhash</ion-label>
+          <ion-input type="string" [(ngModel)]="this.txhashValue" name="this.txhashValue"></ion-input>
+        </ion-item>
+        <div *ngIf="!this.browserName">
+          <ion-button color="primary" expand="full" (click)="funcTxhashPaste()" *ngIf="this.pasteTxhashBtn">ペースト</ion-button>
+          <ion-button color="secondary" expand="full" (click)="funcTxhashDelete()" *ngIf="this.deleteTxhashBtn">削除</ion-button>
+        </div>
+      </ion-list>
+
+      <ion-list *ngIf="this.ShowTxlistinternal">
+        <ion-radio-group value="txAddress" (ionChange)="getOption($event)">
+          <ion-list-header>
+            <ion-label>select options of txlistinternal</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>txAddress</ion-label>
+            <ion-radio slot="start" value="txAddress"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>txhash</ion-label>
+            <ion-radio slot="start" value="txhash"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>blockRange</ion-label>
+            <ion-radio slot="start" value="blockRange"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list *ngIf="this.ShowGetminedblocks">
+        <ion-item>
+          <ion-label position="floating">Insert page #</ion-label>
+          <ion-input type="number" [(ngModel)]="this.pageNum" name="pageNum"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Insert page #</ion-label>
+          <ion-input type="number" [(ngModel)]="this.offsetNum" name="offsetNum"></ion-input>
+        </ion-item>
+        <ion-radio-group value="blocks" (ionChange)="getBlocktype($event)">
+          <ion-list-header>
+            <ion-label>select blocktype</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>blocks</ion-label>
+            <ion-radio slot="start" value="blocks"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+      <ion-button color="primary" expand="full" (click)="submit()">submit</ion-button>
+</ion-content>

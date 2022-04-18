@@ -1,0 +1,7 @@
+{
+  "name": "polygon-scan",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
